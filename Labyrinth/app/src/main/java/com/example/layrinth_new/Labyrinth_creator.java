@@ -20,9 +20,11 @@ public class Labyrinth_creator extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_labyrinth_creator);
+        //Vykreslení pozadí
         labyrinth = new Labyrinth(this);
         labyrinth.setBackgroundColor(Color.GREEN);
         setContentView(labyrinth);
+        //Spuštění hudby na pozadí
         MediaPlayer player = MediaPlayer.create(Labyrinth_creator.this, R.raw.song);
         player.setLooping(true);
         player.start();
@@ -50,6 +52,7 @@ public class Labyrinth_creator extends AppCompatActivity {
         player.start();
     }
     */
+    //Ukládání highScore do SharedPrefernces
     @Override
     public void onBackPressed() {
         super.onBackPressed();
