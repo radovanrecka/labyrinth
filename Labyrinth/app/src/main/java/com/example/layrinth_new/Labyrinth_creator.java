@@ -22,7 +22,7 @@ public class Labyrinth_creator extends AppCompatActivity {
         //setContentView(R.layout.activity_labyrinth_creator);
         //Vykreslení pozadí
         labyrinth = new Labyrinth(this);
-        labyrinth.setBackgroundColor(Color.GREEN);
+        labyrinth.setBackgroundColor(Color.CYAN);
         setContentView(labyrinth);
         //Spuštění hudby na pozadí
         MediaPlayer player = MediaPlayer.create(Labyrinth_creator.this, R.raw.song);

@@ -41,12 +41,12 @@ public class Labyrinth extends View {
         playerPaint.setColor(Color.RED);
 
         exitPaint = new Paint();
-        exitPaint.setColor(Color.BLUE);
+        exitPaint.setColor(Color.MAGENTA);
 
 
         textPaint = new Paint();
         textPaint.setTextAlign(Paint.Align.RIGHT);
-        textPaint.setColor(Color.WHITE);
+        textPaint.setColor(Color.BLACK);
         textPaint.setTextSize(50);
 
         random = new Random();
