@@ -1,9 +1,11 @@
 package com.example.layrinth_new;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.preference.PreferenceManager;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
@@ -14,15 +16,19 @@ import java.util.Stack;
 
 public class Labyrinth extends View {
 
+
+
     private enum Direction{
         UP, DOWN, LEFT, RIGHT
     }
+    public static int score = 0;
+
     private Cell[][] cells;
     private Cell player, exit;
     private static final int COLS = 7, ROWS = 10;
     private static final float Wall_THICKNESS = 4;
     private float cellSize, hMargin, vMargin;
-    private Paint wallPaint, playerPaint, exitPaint;
+    private Paint wallPaint, playerPaint, exitPaint, textPaint;
     private Random random;
 
     public Labyrinth(Context context) {
@@ -37,9 +43,17 @@ public class Labyrinth extends View {
         exitPaint = new Paint();
         exitPaint.setColor(Color.BLUE);
 
+
+        textPaint = new Paint();
+        textPaint.setTextAlign(Paint.Align.RIGHT);
+        textPaint.setColor(Color.WHITE);
+        textPaint.setTextSize(50);
+
         random = new Random();
         createLabyrinth();
     }
+
+
 
     private Cell getNeighbour(Cell cell){
         ArrayList<Cell> neighbours = new ArrayList<>();
@@ -154,6 +168,9 @@ public class Labyrinth extends View {
 
         canvas.drawRect(player.col*cellSize+margin, player.row*cellSize+margin, (player.col+1)*cellSize-margin, (player.row+1)*cellSize-margin, playerPaint);
         canvas.drawRect(exit.col*cellSize+margin, exit.row*cellSize+margin, (exit.col+1)*cellSize-margin, (exit.row+1)*cellSize-margin, exitPaint);
+        canvas.drawText("Score: " + score, 1100,-20,textPaint);
+        canvas.drawText("Highscore: " + Labyrinth_creator.highsScore, 400,-20,textPaint);
+
     }
 
     private void movePlayer(Direction direction){
@@ -176,11 +193,14 @@ public class Labyrinth extends View {
         }
         checkExit();
         invalidate();
+
     }
 
     private void checkExit(){
         if(player == exit){
             createLabyrinth();
+            score++;
+            Labyrinth_creator.highsScore++;
         }
     }
 
